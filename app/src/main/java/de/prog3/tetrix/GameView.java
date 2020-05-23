@@ -13,8 +13,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 
+import de.prog3.tetrix.interfaces.Gamefield;
+import de.prog3.tetrix.interfaces.IPiece;
+import de.prog3.tetrix.pieces.LPieceLeft;
+
 public class GameView extends View {
-    private Bitmap form, backgroundImage, gamefield, scoreStar;
+    private Bitmap form, backgroundImage, scoreStar;
     private  ABlock playerBlock;
 
     private int formX;
@@ -28,10 +32,11 @@ public class GameView extends View {
     private Block[][] feld= new Block[10][18];
     private int screenWidthPixels;
     private int screenHeightPixels;
-    private Gamefield g;
+    private de.prog3.tetrix.interfaces.Gamefield gamefield;
 
 
-
+    de.prog3.tetrix.interfaces.Block grid[][] = new de.prog3.tetrix.interfaces.Block[10][21];
+    IPiece activePiece;
 
 
 
@@ -42,44 +47,28 @@ public class GameView extends View {
 
         DisplayMetrics dpm = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(dpm);
-        form = BitmapFactory.decodeResource(getResources(), R.drawable.square);
-        form = Bitmap.createScaledBitmap(form, formWidth, formHeight, false);
 
-
-        backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.background_main);
-
-        gamefield = BitmapFactory.decodeResource(getResources(), R.drawable.gamefield);
-        gamefield = Bitmap.createScaledBitmap(gamefield,dpm.widthPixels/2, dpm.heightPixels/2,false);
-
-
-        int x= (dpm.widthPixels/2)/2;
-        for (int i = 1; i <xGrid.length+1; i++){
-            xGrid[i-1]=((gamefield.getWidth()/10)*i)+x-40;
-        }
-
-
-        formX = (getScreenWidth() / 2) - (form.getWidth() / 2);
-        startY = (dpm.heightPixels/2)/3;
-        drawY = (dpm.heightPixels/2)/3;
-        formX = xGrid[0];
-        playerBlock = new ABlock(form,formX,startY,true,40,1);
+        gamefield = new Gamefield(context);
     }
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvasWidth = canvas.getWidth();
-        canvasHeight = canvas.getHeight();
-        backgroundImage = Bitmap.createScaledBitmap(backgroundImage, canvasWidth, canvasHeight, false);
-        Rect frameToDrawBG = new Rect(0, 0, backgroundImage.getWidth(), backgroundImage.getHeight());
-        RectF whereToDrawBG = new RectF(0, 0, canvasWidth, canvasHeight);
-        canvas.drawBitmap(backgroundImage, frameToDrawBG, whereToDrawBG, null);
+        gamefield.draw(canvas);
 
-        canvas.drawBitmap(gamefield, (canvasWidth/2)/2,(canvasHeight/2)/3 , null);
-
-        playerBlock.onDraw(canvas);
+       // playerBlock.onDraw(canvas);
 
     }
 
+    /**
+     * Calculates the next frame and renders it
+     */
+    public void nextFrame() {
+        // calculate next frame
+        gamefield.nextFrame();
+
+        // invalidate the view to draw it again
+        this.invalidate();
+    }
 
     public static int getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;

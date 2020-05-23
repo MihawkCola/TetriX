@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,8 +17,12 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.prog3.tetrix.interfaces.Gamefield;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public int FPS = 6;
+
     private TextView text;
     int count = 0;
     private Timer timer = new Timer();
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView im;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,20 +47,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout layout1 = (LinearLayout) findViewById(R.id.gameview);
         layout1.addView(game);
 
-        game.invalidate();
-
-
-        timer.schedule(new TimerTask() {
+        final Runnable nextFrameRunnable = new Runnable() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        game.invalidate();
+                        game.nextFrame();
                     }
                 });
+//                FPS++;
+                game.postDelayed(this, 1000 / FPS);
             }
-        }, 0, 17);
+        };
+
+        game.post(nextFrameRunnable);
+
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        game.nextFrame();
+//                    }
+//                });
+//            }
+//        }, 0, 1000 / FPS);
     }
 
     private void addCount(){
