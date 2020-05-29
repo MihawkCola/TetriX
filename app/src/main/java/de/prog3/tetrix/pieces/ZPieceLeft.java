@@ -2,11 +2,12 @@ package de.prog3.tetrix.pieces;
 
 import android.graphics.Color;
 
-import de.prog3.tetrix.interfaces.Block;
+import de.prog3.tetrix.Abstract.Piece3x3;
+import de.prog3.tetrix.Class.Block;
 
 public class ZPieceLeft extends Piece3x3 {
-    public ZPieceLeft(Block[][] grid) {
-        super(grid);
+    public ZPieceLeft(Block[][] grid,int x) {
+        super(grid,x);
 
         this.color = Color.parseColor("#00ff00");
 

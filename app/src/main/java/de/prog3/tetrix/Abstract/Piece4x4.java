@@ -1,8 +1,8 @@
-package de.prog3.tetrix.pieces;
+package de.prog3.tetrix.Abstract;
 
 import android.graphics.Color;
 
-import de.prog3.tetrix.interfaces.Block;
+import de.prog3.tetrix.Class.Block;
 import de.prog3.tetrix.interfaces.IPiece;
 
 public abstract class Piece4x4 implements IPiece {

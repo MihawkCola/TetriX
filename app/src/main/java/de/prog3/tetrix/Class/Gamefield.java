@@ -1,4 +1,4 @@
-package de.prog3.tetrix.interfaces;
+package de.prog3.tetrix.Class;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,7 +7,9 @@ import android.graphics.Canvas;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import de.prog3.tetrix.Class.Block;
 import de.prog3.tetrix.R;
+import de.prog3.tetrix.interfaces.IPiece;
 import de.prog3.tetrix.pieces.LPieceLeft;
 import de.prog3.tetrix.pieces.LPieceRight;
 import de.prog3.tetrix.pieces.LongPiece;
@@ -41,7 +43,7 @@ public class Gamefield {
                 Bitmap form;
                 form = BitmapFactory.decodeResource(context.getResources(), R.drawable.square_white);
 
-                grid[i][k] = new de.prog3.tetrix.interfaces.Block(form);
+                grid[i][k] = new Block(form);
             }
         }
         createRandomNextPiece();
@@ -49,22 +51,23 @@ public class Gamefield {
     }
 
     public void createRandomNextPiece(){
-        int k = ThreadLocalRandom.current().nextInt(0, 6);
-        switch(6) {
+        int k = ThreadLocalRandom.current().nextInt(0, 5);
+        int position = ThreadLocalRandom.current().nextInt(0, 8);
+        switch(k) {
             case 0:
-                activePiece = new LPieceLeft(grid);
+                activePiece = new LPieceLeft(grid,position);
                 break;
             case 1:
-                activePiece = new ZPieceLeft(grid);
+                activePiece = new ZPieceLeft(grid,position);
                 break;
             case 2:
-                activePiece = new ZPieceRight(grid);
+                activePiece = new ZPieceRight(grid,position);
                 break;
             case 3:
-                activePiece = new LPieceRight(grid);
+                activePiece = new LPieceRight(grid,position);
                 break;
             case 4:
-                activePiece = new TPiece(grid);
+                activePiece = new TPiece(grid,position);
                 break;
             case 5:
                 activePiece = new OPiece(grid);

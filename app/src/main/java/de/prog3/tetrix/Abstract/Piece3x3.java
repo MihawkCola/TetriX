@@ -1,8 +1,8 @@
-package de.prog3.tetrix.pieces;
+package de.prog3.tetrix.Abstract;
 
 import android.graphics.Color;
 
-import de.prog3.tetrix.interfaces.Block;
+import de.prog3.tetrix.Class.Block;
 import de.prog3.tetrix.interfaces.IPiece;
 
 public abstract class Piece3x3 implements IPiece {
@@ -17,10 +17,10 @@ public abstract class Piece3x3 implements IPiece {
     /** reference t the parent grid */
     private Block[][] grid;
 
-    public  Piece3x3(Block[][] grid) {
+    public  Piece3x3(Block[][] grid,int x) {
         this.blocks = new boolean[3][3];
         this.grid = grid;
-        x = 0;
+        this.x = x;
         y = 0;
 
         this.color = Color.parseColor("#ff0000");

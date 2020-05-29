@@ -2,9 +2,10 @@ package de.prog3.tetrix.pieces;
 
 import android.graphics.Color;
 
-import de.prog3.tetrix.interfaces.Block;
+import de.prog3.tetrix.Abstract.Piece4x4;
+import de.prog3.tetrix.Class.Block;
 
-public class LongPiece extends Piece4x4{
+public class LongPiece extends Piece4x4 {
 
     public LongPiece(Block[][] grid) {
         super(grid);

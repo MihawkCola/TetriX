@@ -2,13 +2,13 @@ package de.prog3.tetrix.pieces;
 
 import android.graphics.Color;
 
-import de.prog3.tetrix.interfaces.Block;
-import de.prog3.tetrix.interfaces.IPiece;
+import de.prog3.tetrix.Abstract.Piece3x3;
+import de.prog3.tetrix.Class.Block;
 
-public class LPieceLeft extends Piece3x3{
+public class LPieceLeft extends Piece3x3 {
 
-    public LPieceLeft(Block[][] grid) {
-        super(grid);
+    public LPieceLeft(Block[][] grid,int x) {
+        super(grid,x);
         this.color = Color.parseColor("#ffff00");
 
         this.blocks[0][0] = true;

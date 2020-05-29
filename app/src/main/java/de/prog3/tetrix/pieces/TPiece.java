@@ -2,12 +2,13 @@ package de.prog3.tetrix.pieces;
 
 import android.graphics.Color;
 
-import de.prog3.tetrix.interfaces.Block;
+import de.prog3.tetrix.Abstract.Piece3x3;
+import de.prog3.tetrix.Class.Block;
 
-public class TPiece extends Piece3x3{
+public class TPiece extends Piece3x3 {
 
-    public TPiece(Block[][] grid) {
-        super(grid);
+    public TPiece(Block[][] grid, int x) {
+        super(grid,x);
         this.color = Color.parseColor("#ff00ff");
 
         this.blocks[1][0] = true;

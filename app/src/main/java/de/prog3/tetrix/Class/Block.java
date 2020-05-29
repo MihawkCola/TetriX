@@ -1,4 +1,4 @@
-package de.prog3.tetrix.interfaces;
+package de.prog3.tetrix.Class;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+
+import de.prog3.tetrix.interfaces.IPiece;
 
 public class Block {
     protected Bitmap image;
