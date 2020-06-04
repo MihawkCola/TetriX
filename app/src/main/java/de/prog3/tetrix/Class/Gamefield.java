@@ -28,6 +28,7 @@ public class Gamefield {
 
     Bitmap gamefieldBackground;
 
+    public boolean isFinished = false;
 
     public int x;
     public int y;
@@ -47,12 +48,14 @@ public class Gamefield {
             }
         }
         createRandomNextPiece();
+
+
         activePiece.addToGrid();
     }
 
     public void createRandomNextPiece(){
         int k = ThreadLocalRandom.current().nextInt(0, 5);
-        int position = ThreadLocalRandom.current().nextInt(0, 8);
+        int position = (WIDTH / 2) - 1;
         switch(k) {
             case 0:
                 activePiece = new LPieceLeft(grid,position);
@@ -78,22 +81,24 @@ public class Gamefield {
         }
     }
 
-    public boolean isGameOver(){
-        for (int i = 0; i < WIDTH;i++){
-            if(grid[i][0].isActive()){
-                return true;
-            }
-        }
-        return false;
+
+    public void moveLeft(){
+      activePiece.movePieceLeft();
+    }
+    public void moveRight(){
+        activePiece.movePieceRight();
     }
 
     public void nextFrame() {
-        if(!activePiece.movePieceDown()) {
-            if(isGameOver()){
-                //ToDo End Screen bzw. highscore
-            } else {
-                createRandomNextPiece();
-                activePiece.addToGrid();
+        if (isFinished) return;
+
+        boolean hasMovedDown = activePiece.movePieceDown();
+        if(!hasMovedDown) {
+            createRandomNextPiece();
+            boolean addedSuccessfully = activePiece.addToGrid();
+            if (!addedSuccessfully) {
+                //TODO: SPIEL ABBRUCH
+                isFinished = true;
             }
         }
     }

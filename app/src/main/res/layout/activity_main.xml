@@ -45,4 +45,26 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/Butten_Left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="L"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toStartOf="@+id/Button_right"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameview" />
+
+    <Button
+        android:id="@+id/Button_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Butten_Left"
+        app:layout_constraintTop_toBottomOf="@+id/gameview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

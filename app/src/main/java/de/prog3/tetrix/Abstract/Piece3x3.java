@@ -29,10 +29,46 @@ public abstract class Piece3x3 implements IPiece {
 
 
     public boolean canMoveLeft() {
-        return false;
+        for (int i = 0; i <3;i++) {
+            for (int k = 0; k < 3; k++) {
+                if(blocks[i][k]){
+                    if(i+x-1<0){
+                        return false;
+                    }
+
+                    boolean isSelfLeft = false;
+                    if (i-1 >= 0) {
+                        isSelfLeft = this.blocks[i-1][k];
+                    }
+                    Block blockLeft = grid[x+i-1][y+k];
+                    if(!isSelfLeft && blockLeft.isActive()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
     public boolean canMoveRight() {
-        return false;
+        for (int i = 0; i <3;i++) {
+            for (int k = 0; k < 3; k++) {
+                if(blocks[i][k]){
+                    if(i+x+1 >= grid.length){
+                        return false;
+                    }
+
+                    boolean isSelfLeft = false;
+                    if (i+1 <3) {
+                        isSelfLeft = this.blocks[i+1][k];
+                    }
+                    Block blockLeft = grid[x+i+1][y+k];
+                    if(!isSelfLeft && blockLeft.isActive()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 
@@ -59,15 +95,42 @@ public abstract class Piece3x3 implements IPiece {
         return true;
     }
     public void movePieceLeft() {
+        if (!canMoveLeft()){
+            return;
+        }
+        removeFromGrid();
+        x--;
+        addToGrid();
     }
     public void movePieceRight() {
+        if (!canMoveRight()){
+            return;
+        }
+        removeFromGrid();
+        x++;
+        addToGrid();
     }
 
     /**
      * Add this piece to the grid
      */
-    public void addToGrid() {
+    public boolean addToGrid() {
+        for (int i = 0; i <3;i++) {
+            for (int k = 0; k < 3; k++) {
+                if(blocks[i][k]) {
+                    if (x+i >= 0 && x+i < grid.length
+                            && y+k >=0 && y+k < grid[0].length) {
+                        Block blockBelow = grid[x + i][y + k];
+                        if (blockBelow.isActive()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
         updateGrid(this);
+        return true;
     }
     /**
      * Remove this piece from the grid
@@ -81,6 +144,7 @@ public abstract class Piece3x3 implements IPiece {
                 if (blocks[i][k]) {
                     grid[x + i][y + k].setPiece(piece);
                 }
+
             }
         }
     }

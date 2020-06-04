@@ -69,8 +69,9 @@ public abstract class Piece4x4 implements IPiece {
     /**
      * Add this piece to the grid
      */
-    public void addToGrid() {
+    public boolean addToGrid() {
         updateGrid(this);
+        return true;
     }
     /**
      * Remove this piece from the grid

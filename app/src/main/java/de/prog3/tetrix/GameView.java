@@ -1,17 +1,11 @@
 package de.prog3.tetrix;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.util.DisplayMetrics;
 import android.view.View;
 
-import de.prog3.tetrix.Class.Block;
 import de.prog3.tetrix.Class.Gamefield;
-import de.prog3.tetrix.interfaces.IPiece;
 
 public class GameView extends View {
     private Gamefield gamefield;
@@ -20,8 +14,6 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
 
-        DisplayMetrics dpm = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(dpm);
 
         gamefield = new Gamefield(context);
     }
@@ -43,6 +35,12 @@ public class GameView extends View {
 
         // invalidate the view to draw it again
         //this.invalidate();
+    }
+    public void onButtonLeftClicked(){
+        gamefield.moveLeft();
+    }
+    public void onButtonRightClicked(){
+        gamefield.moveRight();
     }
 
     public static int getScreenWidth() {

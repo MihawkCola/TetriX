@@ -15,5 +15,5 @@ public interface IPiece {
     public void rotateLeft();
     public void rotateRight();
 
-    public void addToGrid();
+    public boolean addToGrid();
 }
